@@ -4,6 +4,13 @@
     <app-hero />
     <router-view/>
     <app-footer />
+    <button
+      aria-label="Scroll to top"
+      class="scroll-top row aic jcc"
+      @click="scrollToTop"
+    >
+      <img src="@/assets/icons/arrow-down.svg" alt="" aria-hidden="true">
+    </button>
   </main>
 </template>
 
@@ -14,6 +21,14 @@ import AppHero from '@/components/AppHero.vue';
 
 export default {
   components: { AppNavbar, AppHero, AppFooter },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    },
+  },
 };
 </script>
 
@@ -77,5 +92,21 @@ body {
 
 .text-weight-medium {
   font-weight: 600;
+}
+</style>
+
+<style lang="scss" scoped>
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #cfb995;
+  background-color: transparent;
+  img {
+    transform: rotate(180deg);
+  }
 }
 </style>

@@ -7,15 +7,38 @@
       </p>
 
       <div class="header__search">
-        <input type="text" placeholder="How can we make you laugh today" aria-label="Search jokes">
+        <input
+          type="text"
+          placeholder="How can we make you laugh today"
+          aria-label="Search jokes"
+          v-model="search"
+        >
       </div>
     </div>
   </header>
 </template>
 
 <script>
-export default {
+import { mapMutations } from 'vuex';
 
+export default {
+  data: () => ({
+    search: '',
+    timeout: null,
+  }),
+  watch: {
+    search(val) {
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+      }
+      this.timeout = setTimeout(() => {
+        this.SET_SEARCH_PARAMS(val);
+      }, 500);
+    },
+  },
+  methods: {
+    ...mapMutations('jokes', ['SET_SEARCH_PARAMS']),
+  },
 };
 </script>
 
@@ -46,6 +69,7 @@ export default {
   &__search {
     input {
       border: 1px solid #FFF;
+      color: #FFF;
       background-color: transparent;
       background-image: url('~@/assets/icons/search.svg');
       background-position: calc(100% - 16px) center;
