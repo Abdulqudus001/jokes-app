@@ -34,7 +34,7 @@
           </div>
           <div class="jokes-container">
             <a
-              href="/" class="joke"
+              href="#" class="joke"
               v-for="joke in jokesInPage"
               :key="joke.id"
             >
@@ -47,6 +47,10 @@
                 <p class="joke__content">
                   {{ joke.value }}
                 </p>
+                <a href="#" class="joke__cta">
+                  See stats
+                  <img src="@/assets/icons/arrow-right.svg" alt="" aria-hidden="true">
+                </a>
               </article>
             </a>
           </div>
@@ -277,6 +281,7 @@ export default {
       text-decoration: none;
       color: #303030;
       transition: .1s box-shadow ease-out;
+      position: relative;
 
       &:hover {
         box-shadow: 0 1px 7px 0 rgba(0, 0, 0, 0.15);
@@ -288,6 +293,21 @@ export default {
         }
         font-weight: 600;
         text-transform: uppercase;
+      }
+
+      &__cta {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        color: #d1bb91;
+        text-decoration: none;
+        font-weight: 600;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        img {
+          margin-left: 7px;
+        }
       }
     }
   }
