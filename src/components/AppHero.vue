@@ -29,10 +29,6 @@ export default {
   color: #FFF;
   text-align: center;
 
-  /* > div {
-    max-width: 100%;
-  } */
-
   &__title {
     color: #cfb995;
     text-transform: capitalize;

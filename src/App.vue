@@ -3,15 +3,17 @@
     <app-navbar />
     <app-hero />
     <router-view/>
+    <app-footer />
   </div>
 </template>
 
 <script>
 import AppNavbar from '@/components/AppNavbar.vue';
+import AppFooter from '@/components/AppFooter.vue';
 import AppHero from '@/components/AppHero.vue';
 
 export default {
-  components: { AppNavbar, AppHero },
+  components: { AppNavbar, AppHero, AppFooter },
 };
 </script>
 
