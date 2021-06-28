@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <main id="app">
     <app-navbar />
     <app-hero />
     <router-view/>
     <app-footer />
-  </div>
+  </main>
 </template>
 
 <script>
@@ -26,6 +26,7 @@ export default {
 body {
   font-family: 'Montserrat', sans-serif;
   color: #303030;
+  background-color: #f9f9f9;
   margin: 0;
 }
 
