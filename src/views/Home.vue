@@ -131,7 +131,7 @@ export default {
         return jokes;
       }
 
-      return jokes.result.filter((el) => el.categories.includes(this.activeCategory.title))
+      return jokes.filter((el) => el.categories.includes(this.activeCategory.title))
       || [];
     },
   },
