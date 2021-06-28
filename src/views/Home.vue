@@ -115,11 +115,19 @@ export default {
       return this.filteredJokes.slice(0, this.currentPage * this.perPage);
     },
     filteredJokes() {
-      if (this.activeCategory.title.toLowerCase() === 'all') {
-        return this.jokes.result;
+      let jokes = this.jokes.result;
+      if (this.search) {
+        jokes = jokes.filter((el) => {
+          const search = this.search.toLowerCase();
+          return el.categories.includes(search) || el.value.includes(search);
+        });
       }
 
-      return this.jokes.result.filter((el) => el.categories.includes(this.activeCategory.title))
+      if (this.activeCategory.title.toLowerCase() === 'all') {
+        return jokes;
+      }
+
+      return jokes.result.filter((el) => el.categories.includes(this.activeCategory.title))
       || [];
     },
   },
