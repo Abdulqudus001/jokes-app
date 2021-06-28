@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 
 export default {
   name: 'Home',
@@ -76,13 +77,16 @@ export default {
         color: '#57dbe6',
       },
     ],
+    currentPage: 0,
+    perPage: 20,
   }),
   mounted() {
-    this.fetchJokes();
+    this.getAllJokes();
   },
   methods: {
-    fetchJokes() {
-      this.$axios.get('jokes/search?query=all').then((res) => {
+    ...mapActions('jokes', ['fetchJokes']),
+    getAllJokes() {
+      this.fetchJokes().then((res) => {
         console.log(res);
       }).catch((err) => {
         console.log(err);
