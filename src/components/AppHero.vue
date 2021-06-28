@@ -45,7 +45,7 @@ export default {
 <style lang="scss" scoped>
 .header {
   background: linear-gradient(rgba($color: #000, $alpha: 0.3), rgba($color: #000, $alpha: 0.3)),
-              url('~@/assets/header-img.png'),
+              url('~@/assets/header-img.webp'),
               no-repeat;
   min-height: 300px;
   background-size: cover;

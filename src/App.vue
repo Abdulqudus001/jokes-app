@@ -104,7 +104,7 @@ body {
   height: 50px;
   border-radius: 50%;
   border: 1px solid #cfb995;
-  background-color: transparent;
+  background-color: #FFF;
   img {
     transform: rotate(180deg);
   }

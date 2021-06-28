@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
 .footer {
   background: linear-gradient(rgba($color: #000, $alpha: 0.3), rgba($color: #000, $alpha: 0.3)),
-              url('~@/assets/footer-img.png'),
+              url('~@/assets/footer-img.webp'),
               no-repeat;
   min-height: 200px;
   background-size: cover;
