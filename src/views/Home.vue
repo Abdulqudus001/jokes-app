@@ -1,43 +1,48 @@
 <template>
   <div class="home">
-    <section class="container">
-      <div class="categories">
-        <button
-          v-for="cat in categories"
-          :key="cat.title"
-          class="category"
-          :style="{ 'background-color': cat.color }"
-          aria-controls="jokes"
-          @click="activeCategory = cat"
-        >
-          {{ cat.title }}
-        </button>
-        <button
-          class="category category--all"
-          @click="activeCategory = { title: 'all', color: null }"
-        >
-          View All
-          <img src="@/assets/icons/arrow-down.svg" alt="" aria-hidden="true">
-        </button>
-      </div>
+    <section class="container" :aria-busy="loadingJokes === true">
+      <template v-if="loadingJokes">
+        <div class="loader" aria-label="Loading jokes"></div>
+      </template>
+      <template v-else>
+        <div class="categories">
+          <button
+            v-for="cat in categories"
+            :key="cat.title"
+            class="category"
+            :style="{ 'background-color': cat.color }"
+            aria-controls="jokes"
+            @click="activeCategory = cat"
+          >
+            {{ cat.title }}
+          </button>
+          <button
+            class="category category--all"
+            @click="activeCategory = { title: 'all', color: null }"
+          >
+            View All
+            <img src="@/assets/icons/arrow-down.svg" alt="" aria-hidden="true">
+          </button>
+        </div>
 
-      <div class="jokes">
-        <div
-          class="active-joke row jcc aic"
-          :style="{ 'background-color': activeCategory.color || '#d1bb91' }"
-        >
-          {{ activeCategory.title }}
+        <div class="jokes">
+          <div
+            class="active-joke row jcc aic"
+            :style="{ 'background-color': activeCategory.color || '#d1bb91' }"
+          >
+            {{ activeCategory.title }}
+          </div>
+          <div class="jokes-container">
+            Hello Bro
+          </div>
         </div>
-        <div class="jokes-container">
-          Hello Bro
-        </div>
-      </div>
+      </template>
     </section>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   name: 'Home',
@@ -78,18 +83,25 @@ export default {
       },
     ],
     currentPage: 0,
+    loadingJokes: true,
     perPage: 20,
   }),
+  computed: {
+    ...mapState('jokes', ['jokes']),
+  },
   mounted() {
     this.getAllJokes();
   },
   methods: {
     ...mapActions('jokes', ['fetchJokes']),
     getAllJokes() {
-      this.fetchJokes().then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err);
+      this.loadingJokes = true;
+      this.fetchJokes().then(() => {
+        this.loadingJokes = false;
+        this.$toast.error('Something went wrong, please refresh');
+      }).catch(() => {
+        this.loadingJokes = false;
+        this.$toast.error('Something went wrong, please refresh');
       });
     },
   },
@@ -102,6 +114,22 @@ export default {
 
   @media screen and (min-width: 768px) {
     padding: 80px 0;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loader {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    border-radius: 50%;
+    border: 5px solid #ddd;
+    border-top-color: #d1bb91;
+    animation: spin 1s linear infinite;
   }
 
   .categories {
